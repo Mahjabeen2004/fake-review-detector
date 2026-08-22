@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+db.sqlite3
+dataset/deceptive-opinion.csv.zip
+*.pkl
+*.npz
+y_labels.csv
