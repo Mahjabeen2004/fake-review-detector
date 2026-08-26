@@ -2,7 +2,16 @@ venv/
 __pycache__/
 *.pyc
 db.sqlite3
-dataset/deceptive-opinion.csv.zip
-*.pkl
-*.npz
-y_labels.csv
+
+# Aayush dataset - exclude large raw file and generated outputs
+dataset_aayush/amazon_reviews.txt
+dataset_aayush/amazon_reviews_clean.csv
+dataset_aayush/*.pkl
+dataset_aayush/*.npz
+dataset_aayush/*.csv
+
+# Hotel comparison - exclude data and generated outputs
+comparisons/hotel/dataset/
+comparisons/hotel/*.pkl
+comparisons/hotel/*.npz
+comparisons/hotel/*.csv
