@@ -1,0 +1,27 @@
+{% extends 'reviews/base.html' %}
+{% block title %}Submit a Review — ReviewCheck{% endblock %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <label>Product name</label>
+  <input type="text" name="product_name" placeholder="e.g. Wireless Bluetooth Earbuds — XYZ Brand" required>
+
+  <div class="mode-toggle">
+    <div class="mode-option active">Single Review</div>
+    <div class="mode-option inactive">Bulk Check</div>
+  </div>
+
+  <label>Reviewer name (optional)</label>
+  <input type="text" name="reviewer_name" placeholder="e.g. mahjabeen_p">
+
+  <label>Paste product review</label>
+  <textarea name="review_text" placeholder="e.g. Amazing product!!! Best purchase EVER!! 5 stars, everyone must buy this right now, life changing!!!" required></textarea>
+  <div class="sample-line">Copy-pasted from Amazon, Flipkart, or typed directly.</div>
+
+  <button type="submit" class="btn">Check Review</button>
+</form>
+
+{% endblock %}

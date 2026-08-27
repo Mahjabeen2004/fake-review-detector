@@ -1,0 +1,43 @@
+{% extends 'reviews/base.html' %}
+{% block title %}Result — ReviewCheck{% endblock %}
+
+{% block content %}
+
+<div class="review-echo">"{{ review.text }}"</div>
+
+<div class="result-card {{ review.final_label }}">
+  <div class="result-tag {{ review.final_label }}">
+    {% if review.final_label == 'fake' %}
+      🔴 Likely Fake
+    {% else %}
+      🟢 Likely Genuine
+    {% endif %}
+  </div>
+
+  <div class="confidence-bar">
+    <div class="confidence-fill {{ review.final_label }}" style="width: {{ confidence_percent }}%;"></div>
+  </div>
+  <div class="confidence-label">{{ confidence_percent }}% confidence</div>
+
+  <div class="feature-row">
+    <div class="feature-chip">
+      <div class="val">{{ review.word_count }} words</div>
+      <div class="lbl">Length</div>
+    </div>
+  </div>
+
+  {% if top_words_list %}
+  <div class="why-box">
+    <div class="why-title">Why flagged — top contributing words</div>
+    {% for word in top_words_list %}
+      <span class="word-chip {{ review.final_label }}">{{ word }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<a href="{% url 'submit_review' %}" style="text-decoration:none;">
+  <button class="btn">Check Another Review</button>
+</a>
+
+{% endblock %}

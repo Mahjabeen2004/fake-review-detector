@@ -1,0 +1,190 @@
+/* reviews/static/reviews/style.css
+   Pulled directly from the UI mockup's color scheme and layout,
+   so the real Django pages match what was already approved. */
+
+:root{
+  --ink:#1b2430;
+  --paper:#f6f7f5;
+  --panel:#ffffff;
+  --line:#dfe3e0;
+  --trust:#1f6f5c;
+  --trust-soft:#e4f2ee;
+  --danger:#a4432f;
+  --danger-soft:#f7e8e4;
+  --accent:#2f6690;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  padding:32px 16px 80px;
+}
+.screen{
+  display:block;
+  max-width:480px;
+  margin:0 auto;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 1px 3px rgba(0,0,0,0.06);
+}
+.app-header{
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--line);
+}
+.app-header .logo{
+  font-weight:700;
+  font-size:1.05rem;
+  letter-spacing:-0.02em;
+}
+.app-header .logo span{color:var(--trust);}
+.app-body{padding:20px;}
+label{
+  display:block;
+  font-size:0.78rem;
+  font-weight:600;
+  color:var(--muted);
+  margin-bottom:6px;
+  text-transform:uppercase;
+  letter-spacing:0.03em;
+}
+textarea{
+  width:100%;
+  min-height:110px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+  font-family:inherit;
+  font-size:0.9rem;
+  resize:vertical;
+  background:#fbfbfa;
+}
+input[type=text]{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:0.9rem;
+  margin-bottom:14px;
+  background:#fbfbfa;
+}
+.btn{
+  display:inline-block;
+  width:100%;
+  text-align:center;
+  background:var(--ink);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:12px;
+  font-size:0.92rem;
+  font-weight:600;
+  margin-top:16px;
+  cursor:pointer;
+}
+.btn:hover{opacity:0.9;}
+.sample-line{
+  font-size:0.75rem;
+  color:var(--muted);
+  margin-top:8px;
+}
+.result-card{
+  border-radius:10px;
+  padding:16px;
+  margin:16px 20px;
+}
+.result-card.fake{background:var(--danger-soft);border:1px solid #e6bfb2;}
+.result-card.genuine{background:var(--trust-soft);border:1px solid #b9dcd0;}
+.result-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-weight:700;
+  font-size:0.95rem;
+  margin-bottom:6px;
+}
+.result-tag.fake{color:var(--danger);}
+.result-tag.genuine{color:var(--trust);}
+.confidence-bar{
+  height:6px;
+  border-radius:4px;
+  background:#e2e5e2;
+  margin:10px 0 6px;
+  overflow:hidden;
+}
+.confidence-fill{height:100%;}
+.confidence-fill.fake{background:var(--danger);}
+.confidence-fill.genuine{background:var(--trust);}
+.confidence-label{font-size:0.75rem;color:var(--muted);}
+.review-echo{
+  font-size:0.85rem;
+  color:#333;
+  font-style:italic;
+  border-left:3px solid var(--line);
+  padding-left:10px;
+  margin:14px 20px;
+}
+.reason-list{
+  font-size:0.8rem;
+  color:var(--muted);
+  padding-left:18px;
+  margin:8px 0 0;
+}
+.reason-list li{margin-bottom:4px;}
+.feature-row{
+  display:flex;
+  gap:10px;
+  margin:12px 0;
+}
+.feature-chip{
+  flex:1;
+  text-align:center;
+  background:#f1f2f0;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:8px 6px;
+}
+.feature-chip .val{font-weight:700;font-size:0.92rem;}
+.feature-chip .lbl{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.02em;margin-top:2px;}
+.why-box{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px dashed var(--line);
+}
+.why-box .why-title{
+  font-size:0.72rem;
+  font-weight:700;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.03em;
+  margin-bottom:8px;
+}
+.word-chip{
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:12px;
+  font-size:0.76rem;
+  margin:0 6px 6px 0;
+  font-weight:600;
+}
+.word-chip.fake{background:var(--danger-soft);color:var(--danger);}
+.word-chip.genuine{background:var(--trust-soft);color:var(--trust);}
+.mode-toggle{
+  display:flex;
+  gap:8px;
+  margin:6px 0 18px;
+}
+.mode-option{
+  flex:1;
+  text-align:center;
+  padding:8px;
+  border-radius:8px;
+  font-size:0.78rem;
+  font-weight:600;
+}
+.mode-option.active{background:var(--ink);color:#fff;}
+.mode-option.inactive{border:1px solid var(--line);color:var(--muted);}

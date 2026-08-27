@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Fake Review Detector{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'reviews/style.css' %}">
+</head>
+<body>
+
+<div class="screen">
+  <div class="app-header">
+    <div class="logo">Review<span>Check</span></div>
+  </div>
+  <div class="app-body">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+</body>
+</html>
