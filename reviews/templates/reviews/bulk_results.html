@@ -1,0 +1,34 @@
+{% extends 'reviews/base.html' %}
+{% block title %}Bulk Results — ReviewCheck{% endblock %}
+
+{% block content %}
+
+<label>Product</label>
+<input type="text" value="{{ product.name }}" disabled style="margin-bottom:16px;">
+
+{% for review in reviews %}
+<div class="review-card {{ review.final_label }}">
+  <div class="quote">"{{ review.text }}"</div>
+  <div class="verdict {{ review.final_label }}">
+    {% if review.final_label == 'fake' %}
+      🔴 Fake — {{ review.confidence_percent }}% confidence
+    {% else %}
+      🟢 Genuine — {{ review.confidence_percent }}% confidence
+    {% endif %}
+  </div>
+</div>
+{% empty %}
+<p class="sample-line">No reviews found in this batch.</p>
+{% endfor %}
+
+<div class="sample-line" style="text-align:center;margin:12px 0 16px;">
+  {{ reviews|length }} review{{ reviews|length|pluralize }} checked in this batch
+</div>
+
+{% if product %}
+<a href="{% url 'product_summary' batch_id %}" style="text-decoration:none;">
+  <button class="btn">View Product Summary →</button>
+</a>
+{% endif %}
+
+{% endblock %}

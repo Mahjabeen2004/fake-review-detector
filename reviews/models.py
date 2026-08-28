@@ -88,5 +88,10 @@ class Review(models.Model):
         if one exists, otherwise the model's original prediction."""
         return self.override_label if self.is_overridden else self.predicted_label
 
+    @property
+    def confidence_percent(self):
+        """Confidence stored as a decimal (0.92) -> clean whole percent (92)."""
+        return round(self.confidence * 100)
+
     def __str__(self):
         return f"{self.product.name} — {self.final_label} ({self.confidence:.0%})"

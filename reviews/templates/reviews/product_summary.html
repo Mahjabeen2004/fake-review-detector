@@ -1,0 +1,51 @@
+{% extends 'reviews/base.html' %}
+{% block title %}Product Summary — ReviewCheck{% endblock %}
+
+{% block content %}
+
+<label>Product being checked</label>
+<input type="text" value="{{ product.name }}" disabled style="margin-bottom:4px;">
+<div class="sample-line" style="margin-bottom:16px;">
+  {{ total }} review{{ total|pluralize }} checked in this batch
+</div>
+
+{% if total > 0 %}
+<div class="result-card mixed">
+  <div class="result-tag mixed">
+    {% if fake_pct >= 50 %}
+      🔴 Mostly Fake
+    {% elif fake_pct >= 25 %}
+      🟡 Mixed Signals
+    {% else %}
+      🟢 Mostly Genuine
+    {% endif %}
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box genuine">
+      <div class="num">{{ genuine_count }}</div>
+      <div class="lbl">Genuine</div>
+    </div>
+    <div class="stat-box fake">
+      <div class="num">{{ fake_count }}</div>
+      <div class="lbl">Fake</div>
+    </div>
+  </div>
+
+  <div class="split-bar">
+    <div class="split-fill" style="width:{{ genuine_pct }}%;background:var(--trust);"></div>
+    <div class="split-fill" style="width:{{ fake_pct }}%;background:var(--danger);"></div>
+  </div>
+  <div class="confidence-label" style="margin-top:6px;">
+    {{ genuine_pct }}% genuine · {{ fake_pct }}% fake ({{ genuine_count }} of {{ total }} reviews)
+  </div>
+</div>
+{% else %}
+<p class="sample-line">No reviews yet for this product.</p>
+{% endif %}
+
+<a href="{% url 'submit_review' %}" style="text-decoration:none;">
+  <button class="btn">Check Another Review</button>
+</a>
+
+{% endblock %}

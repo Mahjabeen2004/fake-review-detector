@@ -10,8 +10,10 @@
   <input type="text" name="product_name" placeholder="e.g. Wireless Bluetooth Earbuds — XYZ Brand" required>
 
   <div class="mode-toggle">
-    <div class="mode-option active">Single Review</div>
-    <div class="mode-option inactive">Bulk Check</div>
+    <div class="mode-option active" style="flex:1;">Single Review</div>
+    <a href="{% url 'submit_bulk_review' %}" style="flex:1;text-decoration:none;">
+      <div class="mode-option inactive" style="width:100%;">Bulk Check</div>
+    </a>
   </div>
 
   <label>Reviewer name (optional)</label>

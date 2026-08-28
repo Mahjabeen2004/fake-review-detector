@@ -1,0 +1,26 @@
+{% extends 'reviews/base.html' %}
+{% block title %}Bulk Check — ReviewCheck{% endblock %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <label>Product name</label>
+  <input type="text" name="product_name" placeholder="e.g. Wireless Bluetooth Earbuds — XYZ Brand" required>
+
+  <div class="mode-toggle">
+    <a href="{% url 'submit_review' %}" style="flex:1;text-decoration:none;">
+      <div class="mode-option inactive" style="width:100%;">Single Review</div>
+    </a>
+    <div class="mode-option active" style="flex:1;">Bulk Check</div>
+  </div>
+
+  <label>Paste multiple reviews (one per line)</label>
+  <textarea name="bulk_reviews" style="min-height:150px;" placeholder="Amazing product!!! Best purchase EVER!!!&#10;Good build quality, battery lasts 2 days...&#10;Best product ever!! Must buy!! 5 stars!!!" required></textarea>
+  <div class="sample-line">Paste up to 50 reviews for this product at once, one per line.</div>
+
+  <button type="submit" class="btn">Check All Reviews</button>
+</form>
+
+{% endblock %}
