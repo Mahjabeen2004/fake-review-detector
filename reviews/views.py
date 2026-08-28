@@ -26,10 +26,14 @@ import os
 import pickle
 import uuid
 
+import pandas as pd
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 
 from preprocess_aayush import preprocess_text
+from reviewer_trust import compute_trust_score
 from .models import Product, Reviewer, Review
 
 
@@ -49,6 +53,41 @@ with open(VECTORIZER_PATH, 'rb') as f:
 # Maps the model's real output labels to what we display/store internally.
 # NEVER change this mapping during training -- only used here, at display/save time.
 LABEL_MAP = {'__label1__': 'fake', '__label2__': 'genuine'}
+
+# The reverse mapping -- needed because reviewer_trust.py's compute_trust_score()
+# was already tested and committed expecting the ORIGINAL '__label1__'/'__label2__'
+# format. Rather than touch that already-working file, we translate our internal
+# 'fake'/'genuine' values back before handing data to it.
+INTERNAL_TO_TRAINING_LABEL = {'fake': '__label1__', 'genuine': '__label2__'}
+
+
+def refresh_reviewer_trust_score(reviewer):
+    """
+    Recomputes and saves ONE reviewer's trust score using their REAL review
+    history from the database -- reusing the exact same compute_trust_score()
+    logic already tested on dummy data (Day 1), completely unchanged.
+
+    Called whenever:
+      - that reviewer posts a new single review, or
+      - an admin overrides one of their reviews' verdict (Fake <-> Genuine)
+    """
+    reviews = Review.objects.filter(reviewer=reviewer)
+    if not reviews.exists():
+        return
+
+    data = {'reviewer_name': [], 'review_text': [], 'predicted_label': [], 'timestamp': []}
+    for r in reviews:
+        data['reviewer_name'].append(reviewer.name)
+        data['review_text'].append(r.text)
+        data['predicted_label'].append(INTERNAL_TO_TRAINING_LABEL[r.final_label])
+        data['timestamp'].append(r.created_at)
+
+    df = pd.DataFrame(data)
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+
+    trust_score, _, _, _ = compute_trust_score(df)
+    reviewer.trust_score = trust_score
+    reviewer.save()
 
 
 def get_top_words(vectorized_input, class_index, top_n=5):
@@ -118,6 +157,9 @@ def submit_review(request):
             reviewer=reviewer,
             **result,
         )
+
+        if reviewer:
+            refresh_reviewer_trust_score(reviewer)
 
         return redirect('review_result', review_id=review.id)
 
@@ -205,3 +247,46 @@ def product_summary(request, batch_id):
         'fake_pct': fake_pct,
     }
     return render(request, 'reviews/product_summary.html', context)
+
+
+@staff_member_required
+def admin_dashboard(request):
+    """
+    Custom Admin Dashboard (Screen 3 from the mockup) -- separate from
+    Django's built-in /admin/. Lists every review with its verdict,
+    reviewer trust score, and an override button.
+
+    @staff_member_required means only logged-in staff/superuser accounts
+    can reach this page -- anyone else gets redirected to the admin login.
+    """
+    reviews = Review.objects.select_related('product', 'reviewer').order_by('-created_at')
+    return render(request, 'reviews/admin_dashboard.html', {'reviews': reviews})
+
+
+@staff_member_required
+@require_POST
+def override_review(request, review_id):
+    """
+    Flips one review's verdict (Fake <-> Genuine). The ORIGINAL model
+    prediction is never touched -- only override_label and is_overridden
+    change, so we always keep both "what the model said" and "what the
+    admin corrected it to."
+
+    If the review has a reviewer attached, their trust score is
+    recalculated immediately using the corrected label.
+    """
+    review = get_object_or_404(Review, id=review_id)
+
+    # Figure out the new label FIRST, before changing anything -- final_label
+    # depends on is_overridden, so if we flip is_overridden before checking
+    # the current verdict, we'd be checking against a value that isn't set yet.
+    new_label = 'genuine' if review.final_label == 'fake' else 'fake'
+
+    review.override_label = new_label
+    review.is_overridden = True
+    review.save()
+
+    if review.reviewer:
+        refresh_reviewer_trust_score(review.reviewer)
+
+    return redirect('admin_dashboard')

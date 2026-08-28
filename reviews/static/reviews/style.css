@@ -212,3 +212,43 @@ input[type=text]{
 .stat-box .lbl{font-size:0.7rem;color:var(--muted);}
 .split-bar{height:10px;border-radius:4px;overflow:hidden;margin-top:12px;background:#e2e5e2;}
 .split-fill{height:100%;float:left;}
+.screen.wide{max-width:960px;}
+.admin-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.82rem;
+}
+.admin-table th{
+  text-align:left;
+  padding:8px 10px;
+  border-bottom:2px solid var(--line);
+  color:var(--muted);
+  font-size:0.72rem;
+  text-transform:uppercase;
+  letter-spacing:0.03em;
+}
+.admin-table td{
+  padding:8px 10px;
+  border-bottom:1px solid var(--line);
+  vertical-align:middle;
+}
+.admin-table td.fake{color:var(--danger);font-weight:600;}
+.admin-table td.genuine{color:var(--trust);font-weight:600;}
+.admin-table .snippet{max-width:220px;color:#333;}
+.overridden-tag{
+  font-size:0.68rem;
+  color:var(--muted);
+  font-weight:400;
+  font-style:italic;
+  margin-left:4px;
+}
+.override-btn{
+  background:none;
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:5px 10px;
+  font-size:0.75rem;
+  cursor:pointer;
+  color:var(--ink);
+}
+.override-btn:hover{background:#f1f2f0;}

@@ -1,0 +1,46 @@
+{% extends 'reviews/base.html' %}
+{% block title %}Admin Dashboard — ReviewCheck{% endblock %}
+{% block screen_class %}wide{% endblock %}
+
+{% block content %}
+
+<table class="admin-table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Reviewer</th>
+      <th>Trust</th>
+      <th>Review</th>
+      <th>Verdict</th>
+      <th>Confidence</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for review in reviews %}
+    <tr>
+      <td>{{ review.product.name }}</td>
+      <td>{{ review.reviewer.name|default:"—" }}</td>
+      <td>{% if review.reviewer %}{{ review.reviewer.trust_score|floatformat:0 }}{% else %}—{% endif %}</td>
+      <td class="snippet">{{ review.text|truncatechars:60 }}</td>
+      <td class="{{ review.final_label }}">
+        {% if review.final_label == 'fake' %}🔴 Fake{% else %}🟢 Genuine{% endif %}
+        {% if review.is_overridden %}<span class="overridden-tag">(overridden)</span>{% endif %}
+      </td>
+      <td>{{ review.confidence_percent }}%</td>
+      <td>
+        <form method="post" action="{% url 'override_review' review.id %}">
+          {% csrf_token %}
+          <button type="submit" class="override-btn">
+            Flip to {% if review.final_label == 'fake' %}Genuine{% else %}Fake{% endif %}
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No reviews yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
