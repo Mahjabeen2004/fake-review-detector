@@ -144,6 +144,15 @@ def submit_review(request):
         reviewer_name = request.POST.get('reviewer_name', '').strip()
         review_text = request.POST.get('review_text', '').strip()
 
+        # Guard against near-empty text (e.g. just spaces slipping past the
+        # HTML 'required' attribute). With zero real words, the model has
+        # nothing to classify -- it would just return a meaningless ~50%
+        # coin-flip result dressed up to look like a real assessment.
+        if len(review_text.split()) < 3:
+            return render(request, 'reviews/submit.html', {
+                'error': 'Please enter a real review (at least a few words) before checking.',
+            })
+
         result = classify_text(review_text)
 
         product, _ = Product.objects.get_or_create(name=product_name)
@@ -183,8 +192,17 @@ def submit_bulk_review(request):
         product_name = request.POST.get('product_name', '').strip()
         raw_text = request.POST.get('bulk_reviews', '')
 
-        # One review per line, ignore blank lines
-        lines = [line.strip() for line in raw_text.split('\n') if line.strip()]
+        # One review per line, ignore blank lines AND lines too short to
+        # classify meaningfully (same reasoning as the single-review guard)
+        lines = [line.strip() for line in raw_text.split('\n') if len(line.strip().split()) >= 3]
+
+        # If EVERY line got filtered out (too short/blank), stop here rather
+        # than creating an empty batch and redirecting to a confusing
+        # "0 reviews checked" results page.
+        if not lines:
+            return render(request, 'reviews/submit_bulk.html', {
+                'error': 'No valid reviews found. Each line needs at least a few words.',
+            })
 
         product, _ = Product.objects.get_or_create(name=product_name)
 

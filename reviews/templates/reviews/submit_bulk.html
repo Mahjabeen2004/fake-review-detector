@@ -6,6 +6,12 @@
 <form method="post">
   {% csrf_token %}
 
+  {% if error %}
+  <div style="background:var(--danger-soft);color:var(--danger);padding:10px 12px;border-radius:8px;font-size:0.82rem;margin-bottom:14px;">
+    {{ error }}
+  </div>
+  {% endif %}
+
   <label>Product name</label>
   <input type="text" name="product_name" placeholder="e.g. Wireless Bluetooth Earbuds — XYZ Brand" required>
 
