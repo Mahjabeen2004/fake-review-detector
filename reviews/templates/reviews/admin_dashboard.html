@@ -4,6 +4,28 @@
 
 {% block content %}
 
+<div class="stat-row" style="margin-bottom:18px;">
+  <div class="stat-box">
+    <div class="num">{{ total_reviews }}</div>
+    <div class="lbl">Total Reviews</div>
+  </div>
+  <div class="stat-box genuine">
+    <div class="num">{{ genuine_count }}</div>
+    <div class="lbl">Genuine</div>
+  </div>
+  <div class="stat-box fake">
+    <div class="num">{{ fake_count }}</div>
+    <div class="lbl">Fake</div>
+  </div>
+  <div class="stat-box">
+    <div class="num">{{ override_rate }}%</div>
+    <div class="lbl">Override Rate ({{ override_count }})</div>
+  </div>
+</div>
+<div class="sample-line" style="margin-bottom:18px;">
+  Model's measured test-set accuracy (from training): 63.57%. Override rate above reflects live admin corrections, not a substitute accuracy measure.
+</div>
+
 <table class="admin-table">
   <thead>
     <tr>

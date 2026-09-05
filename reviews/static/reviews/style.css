@@ -203,7 +203,7 @@ input[type=text]{
 .result-card.mixed{background:#fff8e6;border:1px solid #f0d99a;}
 .result-tag.mixed{color:#9a6b0a;}
 .stat-row{display:flex;gap:14px;margin:10px 0;}
-.stat-box{flex:1;text-align:center;border-radius:8px;padding:10px;}
+.stat-box{flex:1;text-align:center;border-radius:8px;padding:10px;background:#f1f2f0;}
 .stat-box.genuine{background:var(--trust-soft);}
 .stat-box.fake{background:var(--danger-soft);}
 .stat-box .num{font-size:1.3rem;font-weight:700;}

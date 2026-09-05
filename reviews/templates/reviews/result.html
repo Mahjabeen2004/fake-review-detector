@@ -21,10 +21,30 @@
 
   <div class="feature-row">
     <div class="feature-chip">
+      <div class="val" style="{% if review.sentiment_score >= 0.05 %}color:var(--trust);{% elif review.sentiment_score <= -0.05 %}color:var(--danger);{% endif %}">
+        {% if review.sentiment_score >= 0 %}+{% endif %}{{ review.sentiment_score|floatformat:2 }}
+      </div>
+      <div class="lbl">Sentiment</div>
+    </div>
+    <div class="feature-chip">
       <div class="val">{{ review.word_count }} words</div>
       <div class="lbl">Length</div>
     </div>
+    <div class="feature-chip">
+      <div class="val" style="{% if review.similarity_flag %}color:var(--danger);{% endif %}">
+        {{ review.similarity_flag|default:"—" }}
+      </div>
+      <div class="lbl">Similarity</div>
+    </div>
   </div>
+
+  {% if reasons_list %}
+  <ul class="reason-list">
+    {% for reason in reasons_list %}
+      <li>{{ reason }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 
   {% if top_words_list %}
   <div class="why-box">
