@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>How It Works — ReviewCheck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'reviews/style.css' %}">
+</head>
+<body class="lp-body">
+
+{% include 'reviews/_landing_nav.html' %}
+
+<section class="lp-section" style="padding-top:60px;">
+  <div class="lp-section-head">
+    <div class="lp-section-eyebrow">How It Works</div>
+    <div class="lp-section-title">From pasted review to verified result</div>
+  </div>
+  <div class="lp-steps">
+    <div class="lp-step-card">
+      <div class="lp-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+      <div class="lp-step-num">STEP 1</div>
+      <div class="lp-step-title">Paste Your Review</div>
+      <div class="lp-step-desc">Submit a single review, or paste many at once for one product to check them all together.</div>
+    </div>
+    <div class="lp-step-card">
+      <div class="lp-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <div class="lp-step-num">STEP 2</div>
+      <div class="lp-step-title">We Check It</div>
+      <div class="lp-step-desc">The review's wording, tone, and length are checked against patterns commonly seen in real and fake reviews.</div>
+    </div>
+    <div class="lp-step-card">
+      <div class="lp-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5L9.5 17L19 7"/></svg></div>
+      <div class="lp-step-num">STEP 3</div>
+      <div class="lp-step-title">Get an Instant Verdict</div>
+      <div class="lp-step-desc">See Genuine or Fake right away, along with a confidence score showing how sure the result is.</div>
+    </div>
+    <div class="lp-step-card">
+      <div class="lp-step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg></div>
+      <div class="lp-step-num">STEP 4</div>
+      <div class="lp-step-title">See Why</div>
+      <div class="lp-step-desc">A plain-English breakdown shows exactly which words and patterns led to that result — never a black box.</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:56px;">
+    <a href="{% url 'submit_review' %}" class="lp-btn-solid">Try It Now →</a>
+  </div>
+</section>
+
+{% include 'reviews/_landing_footer.html' %}
+
+</body>
+</html>

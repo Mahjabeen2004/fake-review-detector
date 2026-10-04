@@ -232,6 +232,19 @@ def compute_similarity_flag(review_text, reviewer, threshold=0.5):
     return ''
 
 
+def home(request):
+    """The site's landing page -- an entry point with quick links to the
+    main actions, instead of dropping visitors straight into a form."""
+    return render(request, 'reviews/home.html')
+
+
+def how_it_works(request):
+    """A dedicated page explaining the submit -> classify -> result flow,
+    reached via the navbar -- kept separate from the homepage rather than
+    just scrolling to a same-page section."""
+    return render(request, 'reviews/how_it_works.html')
+
+
 def submit_review(request):
     """Shows the submit form (GET) or processes a submitted single review (POST)."""
     if request.method == 'POST':

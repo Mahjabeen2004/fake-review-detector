@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReviewCheck — Detect Fake Product Reviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'reviews/style.css' %}">
+</head>
+<body class="lp-body">
+
+{% include 'reviews/_landing_nav.html' %}
+
+<section class="lp-hero">
+  <div class="lp-hero-text">
+    <div class="lp-eyebrow">✓ AI-Powered Review Verification</div>
+    <div class="lp-headline">Spot Fake Reviews.<br>Trust What's <span class="accent">Real.</span></div>
+    <div class="lp-hero-sub">ReviewCheck instantly checks whether a product review looks genuine or fake — with clear reasoning behind every result, so you know exactly why, not just a label.</div>
+    <div class="lp-hero-actions">
+      <a href="{% url 'submit_review' %}" class="lp-btn-solid">Check a Review →</a>
+      <a href="{% url 'submit_bulk_review' %}" class="lp-btn-solid">Explore Bulk Check →</a>
+    </div>
+    <div class="lp-trust-line">Tested on real reviews · Instant results · Clear, explainable reasoning</div>
+  </div>
+
+  <div class="lp-hero-visual">
+    <div class="lp-float-card lp-float-1">
+      <div class="t">✓ Instant Verdict</div>
+      <div class="d">Results in seconds, with a confidence score.</div>
+    </div>
+    <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
+      <g transform="rotate(-4 190 150)">
+        <rect x="60" y="55" width="260" height="190" rx="14" fill="#ffffff" stroke="#dce3de" stroke-width="2"/>
+        <rect x="90" y="90" width="150" height="10" rx="5" fill="#dce3de"/>
+        <rect x="90" y="118" width="190" height="10" rx="5" fill="#e9edea"/>
+        <rect x="90" y="142" width="170" height="10" rx="5" fill="#e9edea"/>
+        <rect x="90" y="166" width="130" height="10" rx="5" fill="#e9edea"/>
+        <circle cx="98" cy="205" r="7" fill="#b8842e"/>
+        <circle cx="120" cy="205" r="7" fill="#b8842e"/>
+        <circle cx="142" cy="205" r="7" fill="#b8842e"/>
+        <circle cx="164" cy="205" r="7" fill="#b8842e"/>
+        <circle cx="186" cy="205" r="7" fill="#e2e8e4"/>
+      </g>
+      <g transform="rotate(8 90 250)">
+        <circle cx="88" cy="252" r="30" fill="#f6e7e2" stroke="#a23e2c" stroke-width="2.5"/>
+        <path d="M78 242L98 262M98 242L78 262" stroke="#a23e2c" stroke-width="5" stroke-linecap="round"/>
+      </g>
+      <g>
+        <circle cx="330" cy="90" r="56" fill="#ffffff" stroke="#12211d" stroke-width="5"/>
+        <circle cx="330" cy="90" r="44" fill="#e2f1ec" stroke="#157f66" stroke-width="3"/>
+        <path d="M310 91L323 104L352 74" stroke="#157f66" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg>
+    <div class="lp-float-card lp-float-2">
+      <div class="t">🛡 Explainable AI</div>
+      <div class="d">See exactly which signals triggered the result.</div>
+    </div>
+  </div>
+</section>
+
+{% include 'reviews/_landing_footer.html' %}
+
+</body>
+</html>

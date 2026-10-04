@@ -3,15 +3,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>{% block title %}Fake Review Detector{% endblock %}</title>
+<title>{% block title %}ReviewCheck{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'reviews/style.css' %}">
 </head>
 <body>
 
+<div class="page-title">
+  <span class="seal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 12.5L9.5 17L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+  Review<span class="accent">Check</span>
+</div>
+
 <div class="screen {% block screen_class %}{% endblock %}">
-  <div class="app-header">
-    <div class="logo">Review<span>Check</span></div>
-  </div>
   <div class="app-body">
     {% block content %}{% endblock %}
   </div>

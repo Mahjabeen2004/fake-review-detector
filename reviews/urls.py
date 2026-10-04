@@ -16,6 +16,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('', views.home, name='home'),
+    path('how-it-works/', views.how_it_works, name='how_it_works'),
     path('submit/', views.submit_review, name='submit_review'),
     path('result/<int:review_id>/', views.review_result, name='review_result'),
     path('submit/bulk/', views.submit_bulk_review, name='submit_bulk_review'),

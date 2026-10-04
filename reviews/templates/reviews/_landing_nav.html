@@ -1,0 +1,18 @@
+{% load static %}
+<nav class="lp-navbar">
+  <div class="lp-logo">
+    <span class="seal seal-sm" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 12.5L9.5 17L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    Review<span class="accent">Check</span>
+  </div>
+  <div class="lp-nav-links">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'how_it_works' %}">How It Works</a>
+    <a href="{% url 'submit_review' %}">Check a Review</a>
+    <a href="{% url 'submit_bulk_review' %}">Bulk Check</a>
+  </div>
+  <div class="lp-nav-actions" aria-hidden="true"></div>
+</nav>
