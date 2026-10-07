@@ -17,7 +17,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 # ---------------------------------------------------------
-# STEP 1: Dummy data (already built and confirmed by you)
+# STEP 1: Dummy data (already built and confirmed)
 # ---------------------------------------------------------
 dummy_reviews = pd.DataFrame({
     'reviewer_name': ['john_d', 'john_d', 'john_d', 'sara_k', 'sara_k', 'mike_t', 'mike_t', 'mike_t', 'mike_t'],
