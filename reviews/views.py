@@ -57,7 +57,7 @@ with open(VECTORIZER_PATH, 'rb') as f:
 # VADER is a rule-based sentiment tool (not a trained ML model) that scores
 # text from -1 (very negative) to +1 (very positive) using a built-in
 # dictionary of words -- it needs its own one-time download the first time
-# you run this: python -c "import nltk; nltk.download('vader_lexicon')"
+
 sentiment_analyzer = SentimentIntensityAnalyzer()
 
 # Maps the model's real output labels to what we display/store internally.
